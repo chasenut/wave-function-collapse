@@ -4,11 +4,12 @@ import (
 	"fmt"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
+	"github.com/chasenut/wave-function-collapse/src/config"
 )
 
 const (
-	screenWidth int32 = 800
-	screenHeight int32 = 800
+	SCREEN_WIDTH int32 = config.SCREEN_WIDTH
+	SCREEN_HEIGHT int32 = config.SCREEN_HEIGHT
 	FPS int32 = 60
 )
 
@@ -57,21 +58,21 @@ func update() {
 
 	if cameraMoving {
 		if cameraUp {
-			cameraOffset.Y -= cameraSpeed * dt
+			cameraTarget.Y -= cameraSpeed * dt
 		}
 		if cameraDown {
-			cameraOffset.Y += cameraSpeed * dt
+			cameraTarget.Y += cameraSpeed * dt
 		}
 		if cameraRight {
-			cameraOffset.X += cameraSpeed * dt
+			cameraTarget.X += cameraSpeed * dt
 		}
 		if cameraLeft {
-			cameraOffset.X -= cameraSpeed * dt
+			cameraTarget.X -= cameraSpeed * dt
 		}
 	}
 	cameraMoving = false
 	cameraUp, cameraDown, cameraRight, cameraLeft = false, false, false, false
-	camera.Target = cameraOffset
+	camera.Target = cameraTarget
 }
 
 func drawDebugPanel() {
@@ -79,13 +80,14 @@ func drawDebugPanel() {
 		return
 	}
 	rl.DrawText(fmt.Sprintf("FPS: %.3f", float32(1.0 / dt)),
-		int32(cameraOffset.X)-screenWidth/2+20, 
-		int32(cameraOffset.Y)-screenHeight/2+20, 
+		int32(cameraTarget.X)-SCREEN_WIDTH/2+20, 
+		int32(cameraTarget.Y)-SCREEN_HEIGHT/2+20, 
 		40, rl.LightGray)
 }
 
 func drawScene() {
 	rl.ClearBackground(bkgColor)
+	rl.DrawRectangle(0, 0, 100, 100, rl.White) // testing camera
 
 	drawDebugPanel() // bool: showDebugPanel
 }
@@ -101,10 +103,15 @@ func render() {
 }
 
 func initialize() {
-	rl.InitWindow(screenWidth, screenHeight, "Wave Function Collapse")
+	rl.InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Wave Function Collapse")
 	rl.SetTargetFPS(FPS)
 	rl.SetExitKey(0)
 
+	cameraTarget.X = float32(SCREEN_WIDTH/2)
+	cameraTarget.Y = float32(SCREEN_HEIGHT/2)
+	cameraOffset.X = 0
+	cameraOffset.Y = 0
+	camera = rl.NewCamera2D(cameraTarget, cameraOffset, 0, 1)
 }
 
 func exit() {
@@ -114,7 +121,6 @@ func exit() {
 
 func main() {
 	initialize()
-
 
 	for running {
 		input()
