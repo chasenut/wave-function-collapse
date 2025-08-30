@@ -24,7 +24,8 @@ const (
 
 const (
 	// Tile types
-	TILE_GRASS_N int8 = iota
+	TILE_AIR int8 = iota
+	TILE_GRASS_N
 	TILE_GRASS_W
 	TILE_GRASS_E
 	TILE_GRASS_NW
@@ -85,13 +86,67 @@ const (
 	TILE_BUTTON_BIG_R
 )
 
+var (
+	TILE_WEIGHTS = map[int8]int32{
+		TILE_AIR: 				64,
+		TILE_GRASS_N: 			32,
+		TILE_GRASS_W:			32,
+		TILE_GRASS_E:		 	32,
+		TILE_GRASS_NW: 			32,
+		TILE_GRASS_NE: 			32,
+		TILE_GRASS_SW: 			32,
+		TILE_GRASS_SE: 			32,
+		TILE_STONE: 			32,
+		TILE_STONE_1: 			16,
+		TILE_STONE_2: 			16,
+		TILE_STONE_3: 			16,
+		TILE_STONE_4: 			16,
+		TILE_STONE_SKEL_L: 		4,
+		TILE_STONE_SKEL_R: 		4,
+		TILE_FOL_GRASS_TALL: 	32,
+		TILE_FOL_GRASS_SHORT: 	32,
+		TILE_FOL_ROSE: 			8,
+		TILE_FOL_DANDELION: 	8,
+		TILE_FILLAR_B: 			4,
+		TILE_FILLAR_M: 			4,
+		TILE_FILLAR_T: 			4,
+		TILE_BARREL:			8,
+		TILE_TORCH: 			8,
+		TILE_PITCHER_SS: 		4,
+		TILE_PITCHER_SM: 		2,
+		TILE_PITCHER_SL_B: 		1,
+		TILE_PITCHER_SL_T: 		1,
+		/* 	N/A
+		TILE_MARK_QUESION
+		TILE_MARK_EXCLAMATION
+		TILE_MARK_POSITIVE
+		TILE_MARK_NEGATIVE
+		*/
+		TILE_BUSH_S: 			8,
+		TILE_BUSH_L_L: 			4,
+		TILE_BUSH_L_R: 			4,
+		TILE_TREE_FILL: 		8,
+		TILE_TREE_TRUNK: 		8,
+		TILE_TREE_TRUNK_LEAVES:	8,
+		TILE_LEAVES_S: 			8,
+		TILE_LEAVES_N: 			8,
+		TILE_LEAVES_W: 			8,
+		TILE_LEAVES_E: 			8,
+		TILE_LEAVES_NW: 		8,
+		TILE_LEAVES_NE: 		8,
+		TILE_LEAVES_SW: 		8,
+		TILE_LEAVES_SE: 		8,
+	}
+)
 
 type V2F32 struct {
 	X float32
 	Y float32
 }
+
 var (
 	TILE_SPRITES = map[int8]V2F32{
+		TILE_AIR: 				V2F32{112, 	112},
 		TILE_GRASS_N:	 		V2F32{0, 	0},
 		TILE_GRASS_W: 			V2F32{16, 	0},
 		TILE_GRASS_E: 			V2F32{32, 	0},
