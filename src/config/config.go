@@ -4,7 +4,7 @@ const (
 	SCREEN_WIDTH = 1200
 	SCREEN_HEIGHT = 800
 
-	TILESET_PATH string = "res/tilesets/spritesheet.png"
+	TILESET_PATH string = "res/tilesets/maze.png"
 
 	// Grid size
 	GRID_X int32 = 40
@@ -22,6 +22,81 @@ const (
 	WEST int8 = 3
 )
 
+const (
+	// Tile types for tileset wfc model
+	TILE_MAZE_EMPTY int8 = iota
+	TILE_MAZE_EW
+	TILE_MAZE_NS
+	TILE_MAZE_NESW
+	TILE_MAZE_NES
+	TILE_MAZE_NSW
+	TILE_MAZE_NEW
+	TILE_MAZE_ESW
+	TILE_MAZE_ES
+	TILE_MAZE_NW
+	TILE_MAZE_NE
+	TILE_MAZE_SW
+)
+
+const (
+	// Tile edges
+	E_EMPTY int8 = iota
+	E_FULL
+)
+
+type V2F32 struct {
+	X float32
+	Y float32
+}
+
+var (
+	TILE_RULES = map[int8][]int8{
+		TILE_MAZE_EMPTY: {E_EMPTY, E_EMPTY, E_EMPTY, E_EMPTY},
+		TILE_MAZE_EW: {E_EMPTY, E_FULL, E_EMPTY, E_FULL},
+		TILE_MAZE_NS: {E_FULL, E_EMPTY, E_FULL, E_EMPTY},
+		TILE_MAZE_NESW: {E_FULL, E_FULL, E_FULL, E_FULL},
+		TILE_MAZE_NES: {E_FULL, E_FULL, E_FULL, E_EMPTY},
+		TILE_MAZE_NSW: {E_FULL, E_EMPTY, E_FULL, E_FULL},
+		TILE_MAZE_NEW: {E_FULL, E_FULL, E_EMPTY, E_FULL},
+		TILE_MAZE_ESW: {E_EMPTY, E_FULL, E_FULL, E_FULL},
+		TILE_MAZE_ES: {E_EMPTY, E_FULL, E_FULL, E_EMPTY},
+		TILE_MAZE_NW: {E_FULL, E_EMPTY, E_EMPTY, E_FULL},
+		TILE_MAZE_NE: {E_FULL, E_FULL, E_EMPTY, E_EMPTY},
+		TILE_MAZE_SW: {E_EMPTY, E_EMPTY, E_FULL, E_FULL},
+	}
+
+	TILE_WEIGHTS = map[int8]float32{
+		TILE_MAZE_EMPTY: 1,
+		TILE_MAZE_EW: 1,
+		TILE_MAZE_NS: 1,
+		TILE_MAZE_NESW: 1,
+		TILE_MAZE_NES: 1,
+		TILE_MAZE_NSW: 1,
+		TILE_MAZE_NEW: 1,
+		TILE_MAZE_ESW: 1,
+		TILE_MAZE_ES: 1,
+		TILE_MAZE_NW: 1,
+		TILE_MAZE_NE: 1,
+		TILE_MAZE_SW: 1,
+	}
+
+	TILE_SPRITES = map[int8]V2F32{
+		TILE_MAZE_EMPTY: 	{0, 	0},
+		TILE_MAZE_EW: 		{16, 	0},
+		TILE_MAZE_NS: 		{32, 	0},
+		TILE_MAZE_NESW: 	{0, 	16},
+		TILE_MAZE_NES: 		{16, 	16},
+		TILE_MAZE_NSW: 		{32, 	16},
+		TILE_MAZE_NEW: 		{0, 	32},
+		TILE_MAZE_ESW: 		{16, 	32},
+		TILE_MAZE_ES: 		{32, 	32},
+		TILE_MAZE_NW: 		{0, 	48},
+		TILE_MAZE_NE: 		{16, 	48},
+		TILE_MAZE_SW: 		{32, 	48},
+	}
+)
+
+/*
 const (
 	// Tile types
 	TILE_AIR int8 = iota
@@ -87,6 +162,10 @@ const (
 )
 
 var (
+	TILE_RULES = map[int8][]int8{
+		// todo somehow (for the 2d world tileset)
+	}
+
 	TILE_WEIGHTS = map[int8]int32{
 		TILE_AIR: 				64,
 		TILE_GRASS_N: 			32,
@@ -116,12 +195,12 @@ var (
 		TILE_PITCHER_SM: 		2,
 		TILE_PITCHER_SL_B: 		1,
 		TILE_PITCHER_SL_T: 		1,
-		/* 	N/A
+
 		TILE_MARK_QUESION
 		TILE_MARK_EXCLAMATION
 		TILE_MARK_POSITIVE
 		TILE_MARK_NEGATIVE
-		*/
+		
 		TILE_BUSH_S: 			8,
 		TILE_BUSH_L_L: 			4,
 		TILE_BUSH_L_R: 			4,
@@ -139,10 +218,6 @@ var (
 	}
 )
 
-type V2F32 struct {
-	X float32
-	Y float32
-}
 
 var (
 	TILE_SPRITES = map[int8]V2F32{
@@ -209,3 +284,4 @@ var (
 		TILE_BUTTON_BIG_R: 		V2F32{48, 	80},
 	}
 )
+*/
