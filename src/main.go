@@ -87,7 +87,6 @@ func drawDebugPanel() {
 
 func drawScene() {
 	rl.ClearBackground(bkgColor)
-	rl.DrawRectangle(0, 0, 100, 100, rl.White) // testing camera
 
 	drawDebugPanel() // bool: showDebugPanel
 }

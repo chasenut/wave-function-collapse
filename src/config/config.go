@@ -4,15 +4,23 @@ const (
 	SCREEN_WIDTH = 1200
 	SCREEN_HEIGHT = 800
 
-	TILESET_PATH string = "res/tilesets/maze.png"
+
+)
+
+// ###################################
+// ANYTHING BELOW IS TILESET RELATED 
+// NOT YET IMPLEMENTED
+// ###################################
+
+/*
+const (
+	// Tile size (original, from texture) and scale value (for drawing)
+	TILESIZE int32 = 16
+	TILESCALE int32 = 1
 
 	// Grid size
 	GRID_X int32 = 40
 	GRID_Y int32 = 20
-
-	// Tile size (original, from texture) and scale value (for drawing)
-	TILESIZE int32 = 16
-	TILESCALE int32 = 2
 
 	// Directions
 	// go has no enums (crying face emoji)
@@ -20,9 +28,8 @@ const (
 	EAST int8 = 1
 	SOUTH int8 = 2
 	WEST int8 = 3
-)
 
-const (
+
 	// Tile types for tileset wfc model
 	TILE_MAZE_EMPTY int8 = iota
 	TILE_MAZE_EW
@@ -96,7 +103,7 @@ var (
 	}
 )
 
-/*
+// different tileset here, if use, comment the one above
 const (
 	// Tile types
 	TILE_AIR int8 = iota
